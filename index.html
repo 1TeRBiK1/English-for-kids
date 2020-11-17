@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/ico" href="/assets/img/favicon.ico"/>
+    <title>English-for-kids</title>
+</head>
+<body>
+    <div class="header-container">
+        <div class="burger">
+            <input type="checkbox" id="hmt" class="hidden-menu-ticker">
+            <label class="btn-menu" for="hmt">
+                <span class="first"></span>
+                <span class="second"></span>
+                <span class="third"></span>
+            </label>
+            <ul class="hidden-menu" id="hidden-menu">
+            <li><a href="#/">Main Page</a></li>  
+            <li><a href="#/cards">Action (set A)</a></li>  
+            <li><a href="#/cards">Action (set B)</a></li>  
+            <li><a href="#/cards">Action (set C)</a></li>  
+            <li><a href="#/cards">Adjective</a></li>  
+            <li><a href="#/cards">Animal (set A)</a></li>  
+            <li><a href="#/cards">Animal (set B)</a></li>  
+            <li><a href="#/cards">Clothes</a></li>  
+            <li><a href="#/cards">Emotions</a></li>  
+            </ul>
+        </div>
+        <div class="switch-container">
+            <input type="checkbox" id="btnswitch" class="hide-check">
+            <label class="checkbox-anim" for="btnswitch">
+            <div class="switch" id="switch">
+                <div class="switch-content">
+                    <span class="switch-train" id="train">TRAIN</span>
+                    <span class="switch-play off-display" id="play">PLAY</span>
+                    <span class="switcher"></span>
+                </div>
+            </div>
+        </label>
+        </div>
+    </div>  
+    <main>
+        <div class="game-progress"></div>
+    </main>
+    <div class="button-game off-display" id='button-game'>
+        <span class="start-game" >Start Game</span>
+    </div>
+</body>
+<script type="module" src="script.js" as="script"></script>
+</html>
