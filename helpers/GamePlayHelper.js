@@ -1,88 +1,79 @@
 import cards from './cards.js';
 import EndGamePictureSound from './EndGamePictureSound.js';
 
-class GamePlayHelper{
-    arrayCards
-    countErrors
-    star
-    indexCategory 
-    wordGame
-    constructor(Category, event){
-       // console.log(Category);
+export default class GamePlay{
+    constructor(Category){
         this.indexCategory = cards[0].indexOf(Category)+1;
         this.arrayCards = cards[this.indexCategory];
-        this.generationOrder();
         this.countErrors = 0;
-        this.playingGame(event);
+        this.randomSortCards();
+        this.nextWordGame();
     }
-
-    static errorCardSoundStar(){
-        this.countErrors += 1;
+    nextWordGame(){
+        this.wordGame = this.arrayCards.shift();
+    }
+    randomSortCards(){
+        this.arrayCards.sort(() => Math.random() - 0.5);
+    }
+    playCardAudio(){
+        console.log('ans' ,this.wordGame, this.arrayCards);
         var audio = new Audio();
         audio.preload = 'auto';
-        audio.src = './assets/audio/error.mp3';
-        audio.play();
-        this.star = document.createElement('div');
-        this.star.classList.add('star-lose');
-        document.querySelector('main').querySelector('div').appendChild(this.star);
+        audio.src = `${this.wordGame.audioSrc}`;
+        setTimeout(() => audio.play(), 1000);
     }
-    static correctCardSoundStar(){
+    playCorrectSound(){
         var audio = new Audio();
         audio.preload = 'auto';
         audio.src = './assets/audio/correct.mp3';
         audio.play();
+    }
+    playErrorSound(){
+        var audio = new Audio();
+        audio.preload = 'auto';
+        audio.src = './assets/audio/error.mp3';
+        audio.play();
+    }
+    isEndGame(){
+        if(this.arrayCards.length == 0){
+            new EndGamePictureSound(this.countErrors);
+        }
+        else{
+            this.nextWordGame();
+            this.playCardAudio();
+        }
+    }
+    addCorrectStar(){
+        this.star = document.createElement('div');
+        this.star.classList.add('star-correct');
+        document.querySelector('main').querySelector('div').appendChild(this.star);
+    }
+    addErrorStar(){
         this.star = document.createElement('div');
         this.star.classList.add('star-lose');
         document.querySelector('main').querySelector('div').appendChild(this.star);
     }
-    static blurCard(Card)
-    {   
-        document.querySelectorAll('figure').forEach(figure=>
-            {
-                if(figure.querySelector('span').textContent === Card)
+    blurCard(nameCard){
+        document.querySelectorAll('figure').forEach(figure=>{
+                if(figure.querySelector('span').textContent == nameCard)
                 {
                     figure.classList.add('blur');
                 }
             })
     }
-    endGame(){
-        new EndGamePictureSound(this.countErrors);
-    }
-    generationOrder(){
-       // console.log(this.arrayCards);
-        this.arrayCards.sort(() => Math.random() - 0.5);
-        //console.log(this.arrayCards);
-    }
-    playingGame(event){
-            this.wordGame = this.arrayCards.shift();
-            var audio = new Audio();
-            audio.preload = 'auto';
-            audio.src = `${this.wordGame.audioSrc}`;
-            audio.play();
-}   
-    static uud(){
-        if(event.target.closest('figure'))
-        {
-            document.querySelectorAll('figure').forEach(figure=>{
-                if(figure.classList.contains('isClick')){
-                    const text=event.target.closest('figure').querySelector('span').textContent;
-                    switch(text)
-                    {
-                        case this.wordGame:
-                            GamePlayHelper.correctCardSoundStar();
-                            GamePlayHelper.blurCard(element);
-                            event.target.closest('figure').querySelector('span').textContent = 'accept';
-                            break;
-                        case '':
-                            audio.play();
-                        default:
-                            GamePlayHelper.errorCardSoundStar();
-                            break;
-                    }
-                }
-            }
-                );
+    isCorrectCard(nameCard){
+        console.log('isC');
+        if(this.wordGame.word === nameCard){
+            this.playCorrectSound();
+            this.addCorrectStar();
+            this.blurCard(nameCard);
+            this.isEndGame();
+        }
+        else{
+            this.playErrorSound();
+            this.addErrorStar();
+            this.countErrors += 1;
         }
     }
+
 }
-export default GamePlayHelper;

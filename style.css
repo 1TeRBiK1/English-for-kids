@@ -325,3 +325,9 @@ li{
 .blur{
   opacity: 0.5;
 }
+.star-correct {
+  background-image: url(/assets/img/star-win.svg);
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
+}

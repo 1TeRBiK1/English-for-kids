@@ -2,12 +2,15 @@ import cards from './helpers/cards.js';
 import MainPageCreateHelper from './helpers/MainPageCreateHelper.js';
 import CategoryCreateHepler from './helpers/CategoryCreateHelper.js';
 import GamePlayHelper from './helpers/GamePlayHelper.js';
+import EndGamePictureSound from './helpers/EndGamePictureSound.js';
 
-new MainPageCreateHelper();
+window.onload = () => new MainPageCreateHelper() ;
 
 
 let isMainPage = true;
 let playGame = false;
+let category;
+let Game;
 const checkboxBurger = document.querySelector('#hmt');
 
 document.addEventListener('click', clickEvent);
@@ -91,9 +94,19 @@ function clickEvent(event) {
     document.querySelectorAll('figure').forEach((figure) => figure.classList.remove('isClick'));
     event.target.closest('figure').classList.add('isClick');
   }
-  GamePlayHelper.uud();
+  if(playGame && event.target.classList.contains('img-active-play-game')){
+    const text= event.target.closest('figure').querySelector('span').textContent;
+    console.log(text);
+    Game.isCorrectCard(text);
+    console.log('if+');
+  }
+  if(playGame && event.target.classList.contains('add-button-repeat')){
+    Game.playCardAudio();
+    console.log('if');
+  }
 }
 const animation = () => {
+  console.log('1');
   if (!playGame) {
     document.getElementById('switch').classList.add('play-style');
     document.getElementById('train').classList.add('off-display');
@@ -110,7 +123,7 @@ const animation = () => {
   addRemoveButtonPlay();
   removeButtonPlayRepeat();
 };
-document.getElementById('switch').addEventListener('click', animation);
+document.querySelector('.switch-container').addEventListener('click', animation);
 
 document.onmouseover = function () {
   const isClickOnButton1 = event.target.classList.contains('cards');
@@ -162,11 +175,11 @@ function removeButtonPlayRepeat() {
 }
 
 function playGameStart(event) {
-  let Category = 'Action (set A)';
   document.querySelectorAll('a').forEach((elem) => {
     if (elem.classList.contains('active-a')) {
-      Category = elem.textContent;
+     category = elem.textContent;
     }
   });
-  new GamePlayHelper(Category, event);
+  Game = new GamePlayHelper(category);
+  Game.playCardAudio();
 }
