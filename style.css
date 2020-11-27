@@ -187,6 +187,7 @@ li{
   main{
     position: relative;
     top:100px;
+    overflow: hidden;
   }
   .rotate{
     width: 40px;
@@ -325,9 +326,12 @@ li{
 .blur{
   opacity: 0.5;
 }
-.star-correct {
-  background-image: url(/assets/img/star-win.svg);
-  width: 60px;
-  height: 60px;
+.star{
+  width: 40px;
+  height: 40px;
   background-repeat: no-repeat;
+}
+.game-progress{
+  display: flex;
+  justify-content: flex-end;
 }

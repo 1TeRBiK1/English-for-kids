@@ -4,7 +4,7 @@ import EndGamePictureSound from './EndGamePictureSound.js';
 export default class GamePlay{
     constructor(Category){
         this.indexCategory = cards[0].indexOf(Category)+1;
-        this.arrayCards = cards[this.indexCategory];
+        this.arrayCards = cards[this.indexCategory].slice();
         this.countErrors = 0;
         this.randomSortCards();
         this.nextWordGame();
@@ -15,28 +15,33 @@ export default class GamePlay{
     randomSortCards(){
         this.arrayCards.sort(() => Math.random() - 0.5);
     }
+    repeatCardAudio(){
+        this.audio.src = `${this.wordGame.audioSrc}`;
+        this.audio.play();
+    }
     playCardAudio(){
-        console.log('ans' ,this.wordGame, this.arrayCards);
-        var audio = new Audio();
-        audio.preload = 'auto';
-        audio.src = `${this.wordGame.audioSrc}`;
-        setTimeout(() => audio.play(), 1000);
+        console.log('audio', this.wordGame,this.arrayCards);
+        this.audio = new Audio();
+        this.audio.preload = 'auto';
+        this.audio.src = `${this.wordGame.audioSrc}`;
+        setTimeout(() => this.audio.play(), 1000);
     }
     playCorrectSound(){
-        var audio = new Audio();
-        audio.preload = 'auto';
-        audio.src = './assets/audio/correct.mp3';
-        audio.play();
+        this.audio = new Audio();
+        this.audio.preload = 'auto';
+        this.audio.src = './assets/audio/correct.mp3';
+        this.audio.play();
     }
     playErrorSound(){
-        var audio = new Audio();
-        audio.preload = 'auto';
-        audio.src = './assets/audio/error.mp3';
-        audio.play();
+        this.audio = new Audio();
+        this.audio.preload = 'auto';
+        this.audio.src = './assets/audio/error.mp3';
+        this.audio.play();
     }
     isEndGame(){
         if(this.arrayCards.length == 0){
             new EndGamePictureSound(this.countErrors);
+            return true;
         }
         else{
             this.nextWordGame();
@@ -44,13 +49,15 @@ export default class GamePlay{
         }
     }
     addCorrectStar(){
-        this.star = document.createElement('div');
-        this.star.classList.add('star-correct');
+        this.star = document.createElement('img');
+        this.star.src = "../assets/img/star-win.svg";
+        this.star.classList.add('star');
         document.querySelector('main').querySelector('div').appendChild(this.star);
     }
     addErrorStar(){
-        this.star = document.createElement('div');
-        this.star.classList.add('star-lose');
+        this.star = document.createElement('img');
+        this.star.src = "../assets/img/star.svg";
+        this.star.classList.add('star');
         document.querySelector('main').querySelector('div').appendChild(this.star);
     }
     blurCard(nameCard){
@@ -62,7 +69,6 @@ export default class GamePlay{
             })
     }
     isCorrectCard(nameCard){
-        console.log('isC');
         if(this.wordGame.word === nameCard){
             this.playCorrectSound();
             this.addCorrectStar();
@@ -73,6 +79,7 @@ export default class GamePlay{
             this.playErrorSound();
             this.addErrorStar();
             this.countErrors += 1;
+            setTimeout(() => this.repeatCardAudio(), 1000);
         }
     }
 

@@ -8,7 +8,7 @@ window.onload = () => new MainPageCreateHelper() ;
 
 
 let isMainPage = true;
-let playGame = false;
+let isPlayGame = false;
 let category;
 let Game;
 const checkboxBurger = document.querySelector('#hmt');
@@ -27,8 +27,13 @@ function clickEvent(event) {
   }
   const isClickButtonPlay = event.target.classList.contains('button-game')
     || event.target.classList.contains('start-game');
-  if (isClickButtonPlay) {
-    addButtonPlayRepeat(event);
+  const isClickButtonRepeat = event.target.classList.contains('add-div-button-game')
+    || event.target.classList.contains('add-button-repeat');
+  if (isClickButtonPlay && !isClickButtonRepeat) {
+    addButtonPlayRepeat();
+  }
+  else if(isClickButtonPlay && isClickButtonRepeat){
+    Game.repeatCardAudio();
   }
   checkboxBurger.checked = false;
   const isClickOnFigure = event.target.classList.contains('card')
@@ -50,7 +55,7 @@ function clickEvent(event) {
     });
   }
   const isClickOnButton1 = event.target.classList.contains('rotate');
-  if (event.target.closest('figure') && !playGame) {
+  if (event.target.closest('figure') && !isPlayGame) {
     const text = event.target.closest('figure').querySelector('span').textContent;
     cards.forEach((elem) => elem.forEach((elems) => {
       if (elems.word === text) {
@@ -66,6 +71,8 @@ function clickEvent(event) {
   }
 
   if (event.target.tagName === 'A') {
+    Game = null;
+
     document.querySelectorAll('a').forEach((a) => a.classList.remove('active-a'));
     event.target.classList.add('active-a');
     if (event.target.href.split('#/')[1] === 'cards') {
@@ -87,27 +94,24 @@ function clickEvent(event) {
     }
   }
   if (event.target.classList.contains('hide-check')) {
-    playGame = !playGame;
+    isPlayGame = !isPlayGame;
     addRemoveButtonPlay();
   }
-  if (playGame && event.target.closest('figure')) {
+  if (isPlayGame && event.target.closest('figure')) {
     document.querySelectorAll('figure').forEach((figure) => figure.classList.remove('isClick'));
     event.target.closest('figure').classList.add('isClick');
   }
-  if(playGame && event.target.classList.contains('img-active-play-game')){
+  if(isPlayGame && event.target.classList.contains('img-active-play-game')){
     const text= event.target.closest('figure').querySelector('span').textContent;
-    console.log(text);
     Game.isCorrectCard(text);
-    console.log('if+');
   }
-  if(playGame && event.target.classList.contains('add-button-repeat')){
-    Game.playCardAudio();
-    console.log('if');
-  }
+  // if(isPlayGame && event.target.classList.contains('add-button-repeat')){
+  //   console.log('play');
+  //   Game.repeatCardAudio();
+  // }
 }
 const animation = () => {
-  console.log('1');
-  if (!playGame) {
+  if (!isPlayGame) {
     document.getElementById('switch').classList.add('play-style');
     document.getElementById('train').classList.add('off-display');
     document.getElementById('play').classList.remove('off-display');
@@ -137,7 +141,7 @@ function deleteStyleTagA() {
 }
 
 function addPlayStyleMainPage() {
-  if (playGame) {
+  if (isPlayGame) {
     document.querySelectorAll('figure').forEach((div) => div.classList.add('play-style-figure'));
   }
 }
@@ -146,7 +150,7 @@ function addPlayStyleMainPage() {
 function addRemoveButtonPlay() {
   if (isMainPage) {
     document.getElementById('button-game').classList.add('off-display');
-  } else if (playGame) {
+  } else if (isPlayGame) {
     document.getElementById('button-game').classList.remove('off-display');
     document.querySelectorAll('figure').forEach((figure) => {
       figure.querySelector('img').classList.add('img-active-play-game');
@@ -161,11 +165,11 @@ function addRemoveButtonPlay() {
   }
 }
 
-function addButtonPlayRepeat(event) {
+function addButtonPlayRepeat() {
   document.getElementById('button-game').querySelector('span').textContent = '';
   document.getElementById('button-game').querySelector('span').classList.add('add-button-repeat');
   document.getElementById('button-game').classList.add('add-div-button-game');
-  playGameStart(event);
+  playGameStart();
 }
 
 function removeButtonPlayRepeat() {
@@ -174,7 +178,8 @@ function removeButtonPlayRepeat() {
   document.getElementById('button-game').classList.remove('add-div-button-game');
 }
 
-function playGameStart(event) {
+function playGameStart() {
+  console.log('playGameStart');
   document.querySelectorAll('a').forEach((elem) => {
     if (elem.classList.contains('active-a')) {
      category = elem.textContent;

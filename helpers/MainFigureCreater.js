@@ -10,7 +10,6 @@ class MainFigureCreater{
         this.figureContainer = document.createElement('figure');
         this.figureContainer.classList.add('card');
         this.figureContainer.classList.add('main-page');
-
         this.image = document.createElement('img');
         this.image.classList.add('card-image');
         this.image.src = `assets/img/${cards[indexArrayCategory][0].word}.jpg`;
