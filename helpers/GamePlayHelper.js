@@ -56,14 +56,14 @@ export default class GamePlay {
 
   addCorrectStar() {
     this.star = document.createElement('img');
-    this.star.src = '../assets/img/star-win.svg';
+    this.star.src = './assets/img/star-win.svg';
     this.star.classList.add('star');
     document.querySelector('main').querySelector('div').appendChild(this.star);
   }
 
   addErrorStar() {
     this.star = document.createElement('img');
-    this.star.src = '../assets/img/star.svg';
+    this.star.src = './assets/img/star.svg';
     this.star.classList.add('star');
     document.querySelector('main').querySelector('div').appendChild(this.star);
   }

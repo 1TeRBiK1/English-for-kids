@@ -303,7 +303,7 @@ li{
   display: none;
 }
 .add-button-repeat{
-  background-image: url(/assets/img/repeat.png);
+  background-image: url(./assets/img/repeat.png);
   background-size: 53px;
   background-repeat: no-repeat;
   background-position: center;
