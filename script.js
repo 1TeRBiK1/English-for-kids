@@ -1,4 +1,4 @@
-import cardsConfig from './helpers/cardsConfig.js';
+import cardsConfig from './assets/cardsConfig.js';
 import MainPageCreateHelper from './helpers/MainPageCreateHelper.js';
 import CategoryCreateHepler from './helpers/CategoryCreateHelper.js';
 import GamePlayHelper from './helpers/GamePlayHelper.js';

@@ -1,4 +1,4 @@
-import cardsConfig from './cardsConfig.js';
+import cardsConfig from '../assets/cardsConfig.js';
 import MainFigureCreater from './MainFigureCreater.js';
 
 class MainPageCreateHepler {

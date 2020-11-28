@@ -1,4 +1,4 @@
-import cardsConfig from './cardsConfig.js';
+import cardsConfig from '../assets/cardsConfig.js';
 import EndGamePictureSound from './EndGamePictureSound.js';
 
 export default class GamePlay {

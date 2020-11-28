@@ -1,4 +1,4 @@
-import cardsConfig from './cardsConfig.js';
+import cardsConfig from '../assets/cardsConfig.js';
 
 class MainFigureCreater {
   constructor(nameCategory, indexArrayCategory) {
