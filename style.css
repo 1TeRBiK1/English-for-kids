@@ -194,7 +194,7 @@ li{
     height: 40px;
     display: flex;
     justify-content: flex-end;
-    background-image: url(/assets/img/rotate.png);
+    background-image: url(./assets/img/rotate.png);
     background-size: 32px;
     background-repeat: no-repeat;
     background-position: center;
