@@ -172,6 +172,7 @@ const clickEvent = (event) => {
   }
   if (Propirties.isPlayGame && event.target.classList.contains('img-active-play-game')) {
     const cardWord = event.target.closest('figure').querySelector('span').textContent;
+    const isCardBlur = event.target.closest('figure').classList.contains('blur');
     if (Propirties.controllerGame === null) {
       cardsConfig.cards.forEach((elemArray) => elemArray.forEach((elemCard) => {
         if (elemCard.word === cardWord) {
@@ -181,7 +182,7 @@ const clickEvent = (event) => {
           audio.play();
         }
       }));
-    } else if (Propirties.controllerGame !== null) {
+    } else if (Propirties.controllerGame !== null && isCardBlur !== true) {
       Propirties.controllerGame.isCorrectCard(cardWord);
     }
   }
