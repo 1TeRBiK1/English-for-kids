@@ -1,0 +1,337 @@
+body{
+    font-family: Roboto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 22px;
+}
+li{
+  position: relative;
+   top:100px; 
+   margin: 20px;
+   left: 75px;
+   width: 140px;
+}
+.hidden-menu {
+    display: block;
+    position: fixed;
+    list-style:none;
+    padding: 10px;
+    margin: 0;
+    background: linear-gradient(45deg, #00be83, #009aac);
+    box-sizing: border-box;
+    width: 372px;
+    height: 100%;
+    top: 0;
+    left: -372px;
+    transition: left .5s;
+    z-index: 2;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+  .hidden-menu-ticker ,.hide-check {
+    display: none;
+  }
+  .btn-menu {
+    color: #fff;
+    padding: 5px;
+    position: fixed;
+    top: 45px;
+    left: 60px;
+    cursor: pointer;
+    transition: left .23s;
+    z-index: 3;
+    width: 25px;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+  .btn-menu span {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: #cdcdcd;
+    margin: 6px 0 0;
+    transition: all .1s linear .23s;
+    position: relative;
+  }
+  .btn-menu span.first {
+    margin-top: 0;
+  }
+  .hide-check:checked ~ .checkbox-anim .switcher {
+      left: 0;
+  }
+  .hidden-menu-ticker:checked ~ .btn-menu {
+    left: 60px;
+  }
+  .hidden-menu-ticker:checked ~ .hidden-menu {
+    left: 0;
+  }
+  .hidden-menu-ticker:checked ~ .btn-menu span.first {
+    -webkit-transform: rotate(-45deg);
+    top: 10px;
+  }
+  .hidden-menu-ticker:checked ~ .btn-menu span.second {
+    opacity: 0;
+  }
+  .hidden-menu-ticker:checked ~ .btn-menu span.third {
+    -webkit-transform: rotate(45deg);
+    top: -10px;
+  }
+  .active-a{
+      text-decoration:  underline;
+  }
+  .switch-container{
+    position: relative;
+    top: 32px;
+    width: 156px;
+    height: 40px;
+    right: 60px;
+    background-image: linear-gradient(180deg,#eee,#fff 25px);
+    border-radius: 5px;
+  }
+  .header-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .switch{
+    position: relative;
+    top: 3px;
+    left: 3px;
+    width: 150px;
+    height: 40px;
+    background: linear-gradient(45deg, #00be83, #009aac);
+    border-radius: 5px;
+    color:white;
+  }
+  .switcher{
+    position: absolute;
+    top: 3px;
+    left: 105px;
+    width: 33px;
+    height: 33px;
+    border-radius: 5px;
+    transition: left .2s;
+    background-color: white;
+  }
+  .switcher::before{
+      content: "";
+      left: 11px;
+      top: 10px;
+      width: 12px;
+      height: 12px;
+      border-radius: 100%;
+      position: absolute;
+      background-image: linear-gradient(180deg,#eee,#fff);
+  }
+  .switch-train{
+      position: relative;
+      top:5px;
+      float: left;
+      font-size: 25px;
+  }
+  .switch-content{
+    position: relative;
+    left:5px;
+    width: 138px;
+    height: 40px;
+  }
+  .checkbox-anim{
+      cursor: pointer;
+  }
+  .play-style{
+    background: linear-gradient(40deg,#ffd86f,#fc6262);
+  }
+  .switch-play{
+    position: relative;
+    top:5px;
+    float: right;
+    font-size: 25px;
+  }
+  .card-image{
+    width: 300px;
+    height: 200px;
+  }
+  figure{
+    width: 300px;
+    box-shadow: 0 1px 3px 0 #ccc;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.4);
+    -webkit-transition: box-shadow .25s linear,-webkit-transform .7s;
+    transition: box-shadow .25s linear,-webkit-transform .7s;
+    transition: box-shadow .25s linear,transform .7s;
+    transition: box-shadow .25s linear,transform .7s,-webkit-transform .7s;
+    margin: 25px;
+    border-radius: 8px;
+  }
+  figure:hover{
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+  }
+  figcaption{
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color: #212529;
+  }
+  .cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  main{
+    position: relative;
+    top:100px;
+    overflow: hidden;
+  }
+  .rotate{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    background-image: url(./assets/img/rotate.png);
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    cursor: pointer;
+    filter: grayscale(1);
+  }
+  figure span:hover{
+    filter: none;
+  }
+  .card-name{
+     width: 250px;
+     text-align: center;
+  }
+  .card {
+    perspective: 1000;
+    }
+
+     
+    .card, .front, .back {
+    width: 300px;
+    height: 250px;
+    }
+    .flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+     
+    position: relative;
+    }
+    .front, .back {
+    backface-visibility: hidden;
+     
+    position: absolute;
+    top: 0;
+    left: 0;
+    }
+    .front {
+    z-index: 2;
+    }
+    .back {
+    transform: rotateY(180deg);
+    -webkit-animation: cardflip 0.01s;
+    }
+.active .flipper, .card.hover , .card.flip {
+  transform: rotateY(180deg);
+ } 
+ .main-page{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  background: linear-gradient(180deg,  #009aac, #00be83 40%,#fff 0,#fff);
+ }
+ .main-page img{
+  border-radius: 200px;
+  height: 140px;
+  width: 140px;
+  position: relative;
+  top:32px;
+  border: 10px solid #fff;
+ }
+ .main-page div{
+  height: 90px;
+  width: 300px;
+  background: linear-gradient(0deg, #00be83, #009aac);
+ }
+ .main-page figcaption {
+  height: 0px;
+  position: relative;
+  top: 33px;
+}
+.play-style-figure{
+  background: linear-gradient(180deg,#fd6a63,#feb46b 40%,#fff 0,#fff);
+}
+@-webkit-keyframes cardflip {
+  0% {
+      opacity:0.5;
+      -webkit-transform: rotatey(0);
+    }
+  100% {
+      opacity:1;
+      -webkit-transform: rotatey(-180deg); 
+    }
+}
+.button-game{
+  height: 60px;
+    top: 80px;
+    width: 52vw;
+    position: relative;
+    margin: 30px;
+    border-radius: 40px;
+    background: linear-gradient(40deg,#ffd86f,#fc6262);
+    display: flex;
+    justify-content: center;
+    
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+.start-game{
+  position: relative;
+  top: 30px;
+  top: 6px;
+    font-size: 36px;
+    color: white;
+}
+.off-display{
+  display: none;
+}
+.add-button-repeat{
+  background-image: url(./assets/img/repeat.png);
+  background-size: 53px;
+  background-repeat: no-repeat;
+  background-position: center;
+  top: 1px;
+  
+  filter: grayscale(1);
+  width: 60px;
+}
+.add-button-repeat:hover{
+  border-radius: 60px;
+  border: 2px solid green;
+}
+.add-div-button-game{
+  transition: 0.4s;
+  width: 63px;
+}
+.img-active-play-game{
+  height: 100%;
+}
+.blur{
+  opacity: 0.5;
+}
+.star{
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+}
+.game-progress{
+  display: flex;
+  justify-content: flex-end;
+}
